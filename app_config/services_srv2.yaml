@@ -1,0 +1,44 @@
+services:
+  modbus_tcp:
+    name: "Modbus TCP 2 Client"
+    binary_path: "/data/gazpromneft/ADIS/TCP/MB_Client_TCP"
+    config_path: "/data/gazpromneft/ADIS/TCP/MB_port_eth0.ini"
+    process_name: "MB_Client_TCP"
+    depends_on: []
+
+  apx_modbus:
+    name: "APX USO Client 2 (Modbus)"
+    binary_path: "/data/gazpromneft/ADIS/APX/APX_USO_CLI"
+    config_path: "/data/gazpromneft/ADIS/APX/APX_CLI_MB.ini"
+    process_name: "APX_USO_CLI"
+    depends_on: ["modbus_tcp"]
+
+  iec104:
+    name: "IEC 104 Client 2"
+    binary_path: "/data/gazpromneft/ADIS/MEK104/DRV_IEC104_CLIENT"
+    config_path: "/data/gazpromneft/ADIS/MEK104/IEC104_port_eth0.ini"
+    process_name: "DRV_IEC104_CLIENT"
+    depends_on: []
+
+
+
+  apx_iec104:
+    name: "APX USO Client (IEC 104) 2"
+    binary_path: "/data/gazpromneft/ADIS/APX/APX_USO_CLI"
+    config_path: "/data/gazpromneft/ADIS/APX/APX_CLI_IEC.ini"
+    process_name: "APX_USO_CLI"
+    depends_on: ["iec104"]
+
+  argus_shortretro:
+    name: "Argus shortretro (script) 2"
+    binary_path: ""
+    config_path: ""
+    process_name: "Argus_single_shortretro.sh"
+    unit_type: "oneshot" 
+    working_directory: "/data/gazpromneft/argus_gaspromneft"
+    exec_start: "/bin/bash /data/gazpromneft/argus_gaspromneft/_ARM2_Argus_Single_shortretro.sh"
+    environment:
+      DISPLAY: ":0"
+      XAUTHORITY: "%h/.Xauthority"
+      DBUS_SESSION_BUS_ADDRESS: "unix:path=/run/user/%U/bus"
+    depends_on: []

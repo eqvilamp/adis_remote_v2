@@ -1,0 +1,112 @@
+services:
+  modbus_tcp:
+    name: "Modbus TCP Client 1"
+    binary_path: "/data/gazpromneft/ADIS/TCP/MB_Client_TCP"
+    config_path: "/data/gazpromneft/ADIS/TCP/MB_port_eth0.ini"
+    process_name: "MB_Client_TCP"
+    depends_on: []
+
+  apx_modbus:
+    name: "APX USO Client 1 (Modbus)"
+    binary_path: "/data/gazpromneft/ADIS/APX/APX_USO_CLI"
+    config_path: "/data/gazpromneft/ADIS/APX/APX_CLI_MB.ini"
+    process_name: "APX_USO_CLI"
+    depends_on: ["modbus_tcp"]
+    
+  iec104:
+    name: "IEC 104 Client 1"
+    binary_path: "/data/gazpromneft/ADIS/MEK104/DRV_IEC104_CLIENT"
+    config_path: "/data/gazpromneft/ADIS/MEK104/IEC104_port_eth0.ini"
+    process_name: "DRV_IEC104_CLIENT"
+    depends_on: []
+
+  apx_iec104:
+    name: "APX USO Client 1 (IEC 104)"
+    binary_path: "/data/gazpromneft/ADIS/APX/APX_USO_CLI"
+    config_path: "/data/gazpromneft/ADIS/APX/APX_CLI_IEC.ini"
+    process_name: "APX_USO_CLI"
+    depends_on: ["iec104"]
+
+  argus_shortretro1:
+    name: "Argus shortretro (script) 1 start"
+    binary_path: ""
+    config_path: ""
+    process_name: "_Argus_single_buf_arm2.sh"
+    unit_type: "oneshot" 
+    working_directory: "/data/Project/HMI/argus8_linux"
+    exec_start: "/bin/bash /data/Project/HMI/argus8_linux/_Argus_single_buf_arm2.sh"
+    environment:
+      DISPLAY: ":0"
+      XAUTHORITY: "%h/.Xauthority"
+      DBUS_SESSION_BUS_ADDRESS: "unix:path=/run/user/%U/bus"
+    depends_on: []
+
+  argus_shortretro2:
+    name: "Argus shortretro (script) 1 stop"
+    binary_path: ""
+    config_path: ""
+    process_name: "_Argus_Reset.sh"
+    unit_type: "oneshot" 
+    working_directory: "/data/Project/HMI/argus8_linux"
+    exec_start: "/bin/bash /data/Project/HMI/argus8_linux/_Argus_Reset.sh"
+    environment:
+      DISPLAY: ":0"
+      XAUTHORITY: "%h/.Xauthority"
+      DBUS_SESSION_BUS_ADDRESS: "unix:path=/run/user/%U/bus"
+    depends_on: []
+
+  argus_shortretro_2:
+    name: "Argus shortretro (script) 2 start"
+    binary_path: ""
+    config_path: ""
+    process_name: "_Argus_single_buf_arm3.sh"
+    unit_type: "oneshot" 
+    working_directory: "/data/Project/HMI/argus8_ui_2"
+    exec_start: "/bin/bash /data/Project/HMI/argus8_ui_2/_Argus_single_buf_arm3.sh"
+    environment:
+      DISPLAY: ":0"
+      XAUTHORITY: "%h/.Xauthority"
+      DBUS_SESSION_BUS_ADDRESS: "unix:path=/run/user/%U/bus"
+    depends_on: []
+
+  argus_shortretro_3:
+    name: "Argus shortretro (script) 2 stop"
+    binary_path: ""
+    config_path: ""
+    process_name: "_Argus_Reset3.sh"
+    unit_type: "oneshot" 
+    working_directory: "/data/Project/HMI/argus8_ui_2"
+    exec_start: "/bin/bash /data/Project/HMI/argus8_ui_2/_Argus_Reset3.sh"
+    environment:
+      DISPLAY: ":0"
+      XAUTHORITY: "%h/.Xauthority"
+      DBUS_SESSION_BUS_ADDRESS: "unix:path=/run/user/%U/bus"
+    depends_on: []
+
+  argus_shortretro_trans_2:
+    name: "Argus shortretro (script) trans start"
+    binary_path: ""
+    config_path: ""
+    process_name: "_Argus_single_buf_armtrans.sh"
+    unit_type: "oneshot" 
+    working_directory: "/data/Project/HMI/argus8_trans"
+    exec_start: "/bin/bash /data/Project/HMI/argus8_trans/_Argus_single_buf_armtrans.sh"
+    environment:
+      DISPLAY: ":0"
+      XAUTHORITY: "%h/.Xauthority"
+      DBUS_SESSION_BUS_ADDRESS: "unix:path=/run/user/%U/bus"
+    depends_on: []
+
+  argus_shortretro_trans_3:
+    name: "Argus shortretro (script) trans stop"
+    binary_path: ""
+    config_path: ""
+    process_name: "_Argus_Resettrans.sh"
+    unit_type: "oneshot" 
+    working_directory: "/data/Project/HMI/argus8_trans"
+    exec_start: "/bin/bash /data/Project/HMI/argus8_trans/_Argus_Resettrans.sh"
+    environment:
+      DISPLAY: ":0"
+      XAUTHORITY: "%h/.Xauthority"
+      DBUS_SESSION_BUS_ADDRESS: "unix:path=/run/user/%U/bus"
+    depends_on: []

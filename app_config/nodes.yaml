@@ -1,0 +1,44 @@
+- id: "srv_1"
+  name: "Astra Server Test"
+  host: "192.168.116.128"
+  port: 22
+  username: "user"
+  encrypted_password: "1234qwer!@#$QWER"
+  services_file: "services_srv1.yaml"
+  base_working_dir: "/data/Project/HMI/argus8_linux"
+
+- id: "ARM_1"
+  name: "Astra Server ARM1"
+  host: "192.168.3.251"
+  port: 22
+  username: "user"
+  encrypted_password: "1234qwer!@#$QWER"
+  services_file: "services_srv1.yaml"
+  base_working_dir: "/data/Project/HMI/argus8_linux"
+
+- id: "ARM_1.1"
+  name: "Astra Server ARM1 буффер"
+  host: "192.168.3.251"
+  port: 22
+  username: "user"
+  encrypted_password: "1234qwer!@#$QWER"
+  services_file: "services_srv1.yaml"
+  base_working_dir: "/data/Project/HMI/argus8_linux"
+
+- id: "ARM_2"
+  name: "Astra Server ARM2"
+  host: "192.168.3.252"
+  port: 22
+  username: "user"
+  encrypted_password: "1234qwer!@#$QWER"
+  services_file: "services_srv2.yaml"
+  base_working_dir: "/data/Project/HMI/argus8_linux"
+
+- id: "ARM_2.1"
+  name: "Astra Server ARM2 буффер"
+  host: "192.168.3.252"
+  port: 22
+  username: "user"
+  encrypted_password: "1234qwer!@#$QWER"
+  services_file: "services_srv2.yaml"
+  base_working_dir: "/data/Project/HMI/argus8_linux"
